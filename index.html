@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dragon Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="game.js" defer></script>
+</head>
+<body>
+
+<h1>Dragon Game</h1>
+
+<div id="currency-container">
+    <div id="coins-panel">
+        <span id="coin-icon">💰</span>
+        <span id="coin-count">0</span>
+    </div>
+    <div id="rings-panel">
+        <span id="ring-icon">💍</span>
+        <span id="ring-count">0</span>
+    </div>
+</div>
+
+<!-- Pauze overlay -->
+<div id="pause-screen" style="display:none;">
+    <div id="pause-content">
+        <h2>Spel gepauzeerd</h2>
+        <button id="restart-button">Opnieuw spelen</button>
+        <button id="back-to-village-button">Terug naar je dorp</button>
+        <button id="resume-button">Verder spelen</button>
+    </div>
+</div>
+
+<!-- Pauze knop in battlefield -->
+<button id="pause-button">Stop / Pauze</button>
+
+<!-- Character Details Scherm -->
+<div id="character-details-screen" style="display:none;">
+    <h2>Character Details</h2>
+    <div id="character-details-buttons">
+        <button class="character-detail-button" data-target="mario-detail-screen">Mario</button>
+        <button class="character-detail-button" data-target="sonic-detail-screen">Sonic</button>
+        <button class="character-detail-button" data-target="luigi-detail-screen">Luigi</button>
+        <button class="character-detail-button" data-target="shadow-detail-screen">Shadow</button>
+        <button class="character-detail-button" data-target="hulk-detail-screen">Hulk</button>
+    </div>
+    <button id="back-to-village-from-details">Terug naar dorp</button>
+</div>
+
+
+<!-- Character Select Scherm (speler) -->
+<div id="character-select-screen" style="display:none;">
+    <h2>Kies je character</h2>
+    <div id="character-options">
+        <button class="character-choice" data-character="mario">Mario</button>
+        <button class="character-choice" data-character="sonic">Sonic</button>
+        <button class="character-choice" data-character="shadow">Shadow</button>
+        <button class="character-choice" data-character="luigi">Luigi</button>
+        <button class="character-choice" data-character="hulk">Hulk</button>
+    </div>
+</div>
+
+<!-- Enemy Select Scherm -->
+<div id="enemy-select-screen" style="display:none;">
+    <h2>Kies je tegenstander</h2>
+    <div id="enemy-options">
+        <button class="enemy-choice" data-character="mario">Mario</button>
+        <button class="enemy-choice" data-character="sonic">Sonic</button>
+        <button class="enemy-choice" data-character="shadow">Shadow</button>
+        <button class="enemy-choice" data-character="luigi">Luigi</button>
+        <button class="enemy-choice" data-character="hulk">Hulk</button>
+    </div>
+    <button id="random-enemy">🎲 Random</button>
+</div>
+
+<!-- Battlefield -->
+<div id="battlefield" style="display:none;">
+    <!-- Jouw Character -->
+    <div class="character">
+        <img src="mario_sideways.png" alt="Jouw character" class="character-image">
+        <div class="hp-bar">
+            <div id="player-hp" class="hp"></div>
+            <span class="hp-text" id="player-hp-text">1000</span>
+        </div>
+        <button class="ability-button"></button>
+        <button class="ability-button"></button>
+        <button class="ability-button"></button>
+        <button class="ability-button"></button>
+    </div>
+
+    <!-- Vijand -->
+    <div class="character">
+        <img src="sonic_sideways.jpg" alt="Vijand" class="character-image">
+        <div class="hp-bar">
+            <div id="enemy-hp" class="hp"></div>
+            <span class="hp-text" id="enemy-hp-text">1000</span>
+        </div>
+    </div>
+</div>
+
+<!-- Einde scherm -->
+<div id="end-screen" style="display:none;">
+    <div id="end-content">
+        <h2 id="end-message"></h2>
+        <button id="end-restart-button">Opnieuw spelen</button>
+        <button id="end-back-to-village">Terug naar je dorp</button>
+    </div>
+</div>
+
+<!-- Dorpsscherm -->
+<div id="village-screen" style="display:flex;">
+    <h2>Dorp</h2>
+    <button id="collection-button">Collection</button>
+    <button id="characters-button">Characters</button>
+    <button id="shop-button">Shop</button>
+</div>
+
+<!-- Shop scherm -->
+<div id="shop-screen" style="display:none;">
+    <h2>Shop</h2>
+    <button id="back-to-village-from-shop">Terug</button>
+
+    <div class="vault">
+        <input type="text" id="vault-code" placeholder="Voer code in...">
+        <button id="validate-code">Valideer</button>
+    </div>
+</div>
+
+<!-- Character Detail Schermen -->
+<!-- Mario -->
+<div id="mario-detail-screen" class="character-detail-screen" style="display:none;">
+    <div class="character-title">
+        <h2>Mario</h2>
+        <p class="level-text">Level 1</p>
+    </div>
+    <button class="back-from-detail">Terug</button>
+    <img src="Mario_jump.webp" class="character-detail-image mario-image" alt="Mario">
+    <div class="stats-panel">
+        <h3>Levenspunten</h3>
+        <div class="hp-container">
+            <div id="mario-hp-bar" class="hp-inner" style="width: 100%;">
+                <span id="mario-hp-text" class="hp-label">1083 / 2600</span>
+            </div>
+        </div>
+
+        <h3>Abilities</h3>
+<div class="abilities">
+    <p data-unlock="1">Punch - 120</p>
+    <p data-unlock="3">Power Slam (Power Stone) - 140</p>
+    <p data-unlock="7">Ground Pound - 150</p>
+    <p data-unlock="11">Stone Smash (Power Stone) - 200</p>
+</div>
+
+
+    </div>
+    <button class="upgrade-button mario-upgrade-button">💰 Upgraden</button>
+</div>
+
+
+
+<!-- Sonic -->
+<div id="sonic-detail-screen" class="character-detail-screen" style="display:none;">
+    <div class="character-title">
+        <h2>Sonic</h2>
+        <p class="level-text">Level 1</p>
+    </div>
+    <button class="back-from-detail">Terug</button>
+    <img src="sonic_free.png" class="character-detail-image sonic-image" alt="Sonic">
+    <div class="stats-panel">
+        <h3>Levenspunten</h3>
+        <div class="hp-container">
+            <div id="sonic-hp-bar" class="hp-inner">
+                <span id="sonic-hp-text" class="hp-label">800 / 3500</span>
+            </div>
+        </div>
+<h3>Abilities</h3>
+<div class="abilities">
+  <p data-unlock="1">Spin Dash - 100</p>
+  <p data-unlock="3" class="reality-ability">Reality Dash (Reality Stone) - 180</p>
+  <p data-unlock="7" class="reality-ability">Phase Shift (Reality Stone) - 220</p>
+  <p data-unlock="11">Supersonic Slam - 240</p>
+</div>
+
+    </div>
+    <button class="upgrade-button sonic-upgrade-button">💰 Upgraden</button>
+</div>
+
+
+<!-- Luigi -->
+<div id="luigi-detail-screen" class="character-detail-screen" style="display:none;">
+    <div class="character-title">
+        <h2>Luigi</h2>
+        <p class="level-text">Level 1</p>
+    </div>
+    <button class="back-from-detail">Terug</button>
+    <img src="Luigi_jump.webp" class="character-detail-image luigi-image" alt="Luigi">
+    <div class="stats-panel">
+        <h3>Levenspunten</h3>
+        <div class="hp-container">
+            <div id="luigi-hp-bar" class="hp-inner" style="width: 100%;">
+                <span id="luigi-hp-text" class="hp-label">1042 / 2500</span>
+            </div>
+        </div>
+<h3>Abilities</h3>
+<div class="abilities">
+  <p data-unlock="1">Green Punch - 110</p>
+  <p data-unlock="3" class="reality-ability">Reality Warp (Reality Stone) - 190</p>
+  <p data-unlock="7">Poltergust Blast - 160</p>
+  <p data-unlock="11">Jump Smash - 180</p>
+</div>
+
+    </div>
+    <button class="upgrade-button luigi-upgrade-button">💰 Upgraden</button>
+</div>
+
+
+
+
+
+<!-- Shadow -->
+<div id="shadow-detail-screen" class="character-detail-screen" style="display:none;">
+    <div class="character-title">
+        <h2>Shadow</h2>
+        <p class="level-text">Level 1</p>
+    </div>
+    <button class="back-from-detail">Terug</button>
+    <img src="shadow_.webp" class="character-detail-image shadow-image" alt="Shadow">
+    <div class="stats-panel">
+        <h3>Levenspunten</h3>
+        <div class="hp-container">
+            <div id="shadow-hp-bar" class="hp-inner">
+                <span id="shadow-hp-text" class="hp-label">850 / 3500</span>
+            </div>
+        </div>
+<h3>Abilities</h3>
+<div class="abilities">
+  <p data-unlock="1" class="soul-ability">Soul Drain (Soul Stone) - 170</p>
+  <p data-unlock="3">Chaos Slash - 150</p>
+  <p data-unlock="7">Dark Bind - 200</p>
+  <p data-unlock="11" class="mind-ability">Mind Control (Mind Stone) - 250</p>
+</div>
+
+    </div>
+    <button class="upgrade-button shadow-upgrade-button">💰 Upgraden</button>
+</div>
+
+
+<!-- Hulk -->
+<div id="hulk-detail-screen" class="character-detail-screen" style="display:none;">
+    <div class="character-title">
+        <h2>Hulk</h2>
+        <p>Level 1</p>
+    </div>
+    <button class="back-from-detail">Terug</button>
+    <img src="hulk_jump.webp" class="character-detail-image hulk-image" alt="Hulk">
+    <div class="stats-panel">
+        <h3>Levenspunten</h3>
+        <div class="hp-container">
+            <div id="hulk-hp-bar" class="hp-inner">
+                <span id="hulk-hp-text" class="hp-label">1200 / 3500</span>
+            </div>
+        </div>
+<h3>Abilities</h3>
+<div class="abilities">
+  <p data-unlock="1" class="power-ability">Power Smash (Power Stone) - 200</p>
+  <p data-unlock="3">Roar of Rage - 140</p>
+  <p data-unlock="7" class="power-ability">Crushquake (Power Stone) - 260</p>
+  <p data-unlock="11">Thunder Clap - 220</p>
+</div>
+
+    </div>
+    <button class="upgrade-button hulk-upgrade-button">💰 Upgraden</button>
+</div>
+
+
+</body>
+</html>

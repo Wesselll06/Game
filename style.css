@@ -1,0 +1,509 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f0f8ff;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Character Select */
+#character-select-screen {
+    display: none; /* standaard verborgen */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+#character-options {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Battlefield */
+#battlefield {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.character {
+    width: 40%;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+    position: relative; /* belangrijk voor floating damage text */
+}
+
+.character-image {
+    width: 150px;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.hp-bar {
+    width: 100%;
+    height: 20px;
+    background: #ddd;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.hp {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px 0 0 10px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.hp-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: black;
+    pointer-events: none;
+}
+
+/* Damage floating text */
+.damage-text {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    color: red;
+    font-weight: 900; /* Dikker */
+    font-size: 1.5rem; /* Groter */
+    animation: floatUp 1s ease-out forwards;
+    pointer-events: none;
+    z-index: 999;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+    }
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* End screen */
+#end-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    display: flex;
+}
+
+#end-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+#end-content button {
+    margin: 10px;
+}
+
+/* Pause screen */
+#pause-screen {
+    display: none; /* standaard verborgen */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#pause-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+#pause-content button {
+    margin: 10px;
+}
+
+/* Pause knop */
+#pause-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+#pause-button:hover {
+    background-color: #e67e22;
+}
+
+/* Village screen */
+#village-screen {
+    display: flex; /* flex container */
+    justify-content: center; /* horizontaal centreren */
+    align-items: center; /* verticaal centreren */
+    flex-direction: column; /* knoppen onder elkaar */
+    width: 100%;
+    height: 100%;
+    background-color: white; /* leeg wit scherm */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+/* Alleen standaard schermen verbergen die echt verborgen moeten zijn */
+#character-select-screen,
+#enemy-select-screen,
+#end-screen,
+#pause-screen,
+#shop-screen {
+    display: none;
+}
+
+/* Terug naar gevecht */
+#back-to-battle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: white; /* witte achtergrond */
+    color: black; /* zwarte tekst */
+    border: 2px solid black; /* zwarte omlijning */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Village content */
+#village-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* ruimte tussen knoppen */
+}
+
+#collection-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Enemy select screen */
+#enemy-select-screen {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+#enemy-options {
+    display: flex;
+    flex-direction: row; /* knoppen naast elkaar */
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap; /* responsief */
+    justify-content: center;
+}
+
+.enemy-choice,
+#random-enemy {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Character details menu */
+#character-details-screen {
+    display: flex; /* altijd flex als actief */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+
+/* Character detail scherm */
+.character-detail-screen {
+    position: fixed;      /* bovenop alles */
+    top: 0;
+    left: 0;
+    width: 100vw;         /* volledige breedte van viewport */
+    height: 100vh;        /* volledige hoogte van viewport */
+    display: flex;
+    align-items: center;  /* verticaal centreren */
+    justify-content: flex-start; /* image links */
+    padding: 20px;
+    box-sizing: border-box;
+    background-size: cover;
+    background-position: center;
+    z-index: 10000;       /* boven andere elementen */
+    overflow: hidden;     /* voorkomt scrollen */
+}
+
+/* Achtergronden */
+#mario-detail-screen { background-image: url('realitystone.habit.webp'); }
+#sonic-detail-screen { background-image: url('soulstone.habit.webp'); }
+#luigi-detail-screen { background-image: url('timestone.habit.webp'); }
+#shadow-detail-screen { background-image: url('mindstone.habit.webp'); }
+#hulk-detail-screen { background-image: url('powerstone.habit.webp'); }
+
+/* Algemene afbeelding instellingen */
+.character-detail-image {
+    height: auto;
+    z-index: 10002;
+}
+
+/* Individuele character images */
+.mario-image { max-width: 190px; margin-left: 110px; }
+.sonic-image { max-width: 340px; margin-left: 100px; }
+.shadow-image { max-width: 230px; margin-left: 150px; }
+.luigi-image { max-width: 230px; margin-left: 140px; }
+.hulk-image { max-width: 350px; margin-left: 120px; }
+
+.character-title {
+    position: absolute;
+    top: 50px;
+    left: 100px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: left;
+    z-index: 10001;
+}
+
+.character-title h2 { margin: 0; font-size: 2rem; }
+.character-title p { margin: 0; font-size: 1.3rem; color: #333; }
+
+/* Info panel */
+.character-info-panel {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    text-align: left;
+    font-family: Arial, sans-serif;
+    color: black;
+    z-index: 10003;
+}
+
+.character-info-panel h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.2rem; text-align: center; }
+.character-info-panel p { margin: 0; font-weight: bold; font-size: 1rem; text-align: center; }
+
+/* Stats panel */
+.stats-panel {
+    position: absolute;
+    right: 5%;
+    top: 15%;
+    width: 350px;
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    text-align: left;
+}
+
+.stats-panel h3 { margin-top: 0; margin-bottom: 25px; font-size: 1.5rem; font-weight: bold; }
+.stats-panel .abilities p { margin: 15px 0; font-size: 1.3rem; font-weight: 600; }
+
+.stats-panel .hp-container {
+    width: 100%;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.stats-panel .hp-inner {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 12px 0 0 12px;
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hp-label {
+    color: white;
+    font-weight: bold;
+    z-index: 2;
+    position: relative;
+}
+
+/* Container voor coins en rings */
+#currency-container {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    gap: 20px; /* ruimte tussen coins en rings */
+    z-index: 11000;
+}
+
+/* Coins panel */
+#coins-panel, #rings-panel {
+    background: white;
+    border: 2px solid gold;
+    border-radius: 12px;
+    padding: 8px 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#coin-icon, #ring-icon {
+    font-size: 1.4rem;
+}
+
+
+
+/* Shop */
+#shop-screen {
+    display: none;
+    background: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.vault {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.vault input {
+    padding: 10px;
+    font-size: 16px;
+    width: 200px;
+}
+
+.vault button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: gold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Upgrade knop */
+.upgrade-button {
+    position: absolute;
+    bottom: 20px;
+    left: 100px;
+    background: gold;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: auto;
+    max-width: 180px;
+    text-align: center;
+}
+
+/* Individuele upgrade buttons */
+.mario-upgrade-button { bottom: 75px; left: 240px; width: 130px; max-width: 250px; height: auto; }
+.sonic-upgrade-button { bottom: 135px; left: 300px; width: 130px; padding: 8px 12px; }
+.luigi-upgrade-button { bottom: 120px; left: 290px; width: 145px; padding: 10px 14px; }
+.shadow-upgrade-button { bottom: 120px; left: 310px; width: 150px; padding: 12px 16px; }
+.hulk-upgrade-button { bottom: 120px; left: 300px; width: 160px; padding: 12px 18px; }
+
+.hidden { display: none; }
